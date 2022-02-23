@@ -1,0 +1,35 @@
+{
+    "name": "topsystem/topportal",
+    "autoload": {
+        "psr-4": {
+            "TopSystem\\TopPortal\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "root",
+            "email": "admin@root.com"
+        }
+    ],
+    "require": {
+        "php": "^7.3|^7.4|^8.0",
+        "illuminate/support": "~6.0|~7.0|~8.0",
+        "illuminate/routing": "~6.0|~7.0|~8.0",
+        "laravel/ui": ">=1.0",
+        "ext-json": "*",
+        "topsystem/topadmin": "dev-master"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "TopSystem\\TopPortal\\PortalServiceProvider"
+            ]
+        }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../topadmin_project"
+        }
+    ]
+}

@@ -1,0 +1,53 @@
+<?php
+
+namespace TopSystem\TopPortal\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use TopSystem\TopAdmin\Traits\Translatable;
+
+class TagItem extends Model
+{
+    use Translatable;
+
+    protected $table = "tag_item";
+
+    protected $translatable = ['name', 'logo', 'body'];
+
+    /**
+     * Statuses.
+     */
+    public const STATUS_ACTIVE = 'ACTIVE';
+    public const STATUS_INACTIVE = 'INACTIVE';
+
+    /**
+     * List of statuses.
+     *
+     * @var array
+     */
+    public static $statuses = [self::STATUS_ACTIVE, self::STATUS_INACTIVE];
+
+    protected $guarded = [];
+
+    public function save(array $options = [])
+    {
+        // If no author has been assigned, assign the current user's id as the author of the post
+        if (!$this->author_id && Auth::user()) {
+            $this->author_id = Auth::user()->getKey();
+        }
+
+        return parent::save();
+    }
+
+    /**
+     * Scope a query to only include active pages.
+     *
+     * @param  $query  \Illuminate\Database\Eloquent\Builder
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('status', static::STATUS_ACTIVE);
+    }
+}
