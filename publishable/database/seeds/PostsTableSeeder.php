@@ -299,6 +299,26 @@ class PostsTableSeeder extends Seeder
             ])->save();
         }
 
+        $dataRow = $this->dataRow($postDataType, 'post_belongstomany_tag_relationship');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'relationship',
+                'display_name' => 'Tags',
+                'required'     => 1,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 1,
+                'details'      => [
+                    'foreign_pivot_key' =>  'tid',
+                    'related_pivot_key' =>  'pid',
+                    'parent_key'        =>  'id'
+                ],
+                'order'        => 16,
+            ])->save();
+        }
+
         //Menu Item
         $menu = Menu::where('name', 'admin')->firstOrFail();
         $menuItem = MenuItem::firstOrNew([

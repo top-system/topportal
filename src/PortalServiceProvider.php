@@ -15,7 +15,6 @@ class PortalServiceProvider extends ServiceProvider{
      */
     public function register()
     {
-
         $this->registerConfigs();
 
         $this->loadHelpers();

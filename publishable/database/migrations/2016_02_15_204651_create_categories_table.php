@@ -20,6 +20,9 @@ class CreateCategoriesTable extends Migration
             $table->integer('order')->default(1);
             $table->string('name');
             $table->string('slug')->unique();
+            $table->string('seo_title')->nullable();
+            $table->text('meta_description')->nullable();
+            $table->text('meta_keywords')->nullable();
             $table->timestamps();
         });
     }

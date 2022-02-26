@@ -127,6 +127,52 @@ class CategoriesTableSeeder extends Seeder
             ])->save();
         }
 
+        $dataRow = $this->dataRow($categoryDataType, 'seo_title');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'text',
+                'display_name' => __('admin::seeders.data_rows.seo_title'),
+                'required'     => 0,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 1,
+                'order'        => 6,
+            ])->save();
+        }
+
+        $dataRow = $this->dataRow($categoryDataType, 'meta_description');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'text_area',
+                'display_name' => __('admin::seeders.data_rows.meta_description'),
+                'required'     => 1,
+                'browse'       => 0,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 1,
+                'order'        => 7,
+            ])->save();
+        }
+
+        $dataRow = $this->dataRow($categoryDataType, 'meta_keywords');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'text_area',
+                'display_name' => __('admin::seeders.data_rows.meta_keywords'),
+                'required'     => 1,
+                'browse'       => 0,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 1,
+                'order'        => 8,
+            ])->save();
+        }
+
+
         $dataRow = $this->dataRow($categoryDataType, 'created_at');
         if (!$dataRow->exists) {
             $dataRow->fill([
@@ -138,7 +184,7 @@ class CategoriesTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'order'        => 6,
+                'order'        => 9,
             ])->save();
         }
 
@@ -153,7 +199,7 @@ class CategoriesTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'order'        => 7,
+                'order'        => 10,
             ])->save();
         }
 
