@@ -12,6 +12,7 @@ class PortalDummyDatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
+            CategoriesTableSeeder::class,
             UsersTableSeeder::class,
             PostsTableSeeder::class,
             PagesTableSeeder::class,
