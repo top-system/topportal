@@ -5,6 +5,7 @@ namespace TopSystem\TopPortal\Models;
 use Illuminate\Database\Eloquent\Model;
 use TopSystem\TopAdmin\Facades\Admin;
 use TopSystem\TopAdmin\Traits\Translatable;
+use TopSystem\TopPortal\Tree;
 
 class Category extends Model
 {

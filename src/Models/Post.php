@@ -54,4 +54,56 @@ class Post extends Model
     {
         return $this->belongsTo(Admin::modelClass('Category'));
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function tag()
+    {
+        return $this->belongsToMany(Tag::class,TagPost::class,'tid','pid');
+    }
+
+    /**
+     * 前一个
+     * @return $this
+     */
+    public function publishedPrev(){
+        return $this->where('id','<',$this->id)->first();
+    }
+
+    /**
+     * 下一个
+     * @return $this
+     */
+    public function publishedNext(){
+        return $this->where('id','>',$this->id)->first();
+    }
+
+    /**
+     * 获取相关文章
+     * @return $this
+     */
+    public function publishedRelated($page= 5){
+        $model = new self();
+        $model = $model->where('id','!=',$this->id);
+        if ($this->category_id > 0){
+            $model = $model->where('category_id',$this->category_id);
+        }else{
+            $model = $model->where('category_id',null);
+        }
+        return $model->take($page)->get();
+    }
+
+    /**
+     * 获取热门内容
+     * @param int $page
+     * @return mixed
+     */
+    public function publishedPopular($page= 5,$category_id=0){
+        $model = new self();
+        if ($category_id > 0){
+            $model = $model->where('category_id',$category_id);
+        }
+        return $model->orderBy('post_hits','desc')->take($page)->get();
+    }
 }

@@ -218,6 +218,10 @@
                             <div class="form-group">
                                 <label for="category_id">{{ __('admin::post.category') }}</label>
                                 <select class="form-control" name="category_id">
+                                  @include('admin::formfields.select_tree', [
+                                        '_field_name'  => 'meta_keywords',
+                                        '_field_trans' => get_field_translations($dataTypeContent, 'meta_keywords')
+                                    ])
                                     @foreach(Admin::model('Category')::all() as $category)
                                         <option value="{{ $category->id }}"@if(isset($dataTypeContent->category_id) && $dataTypeContent->category_id == $category->id) selected="selected"@endif>{{ $category->name }}</option>
                                     @endforeach

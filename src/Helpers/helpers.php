@@ -1,56 +1,69 @@
 <?php
 
-if (!function_exists('categories')) {
-    function categories($parent_id=null)
+/**
+ * 分类链接
+ */
+if (!function_exists('category_path')) {
+    function category_path($id)
     {
-        return TopSystem\TopPortal\Models\Category::where('parent_id',$parent_id)->get();
+        return route('cms.category', $id);
     }
 }
 
-if (!function_exists('downloads')) {
-    function downloads($wheres = [], $orders = [])
-    {
-         $model = new TopSystem\TopPortal\Models\Download();
-         if (isset($wheres['category_id'])){
-             $model = $model->where('category_id',$wheres['category_id']);
-         }elseif (isset($wheres['name'])){
-             $model = $model->where('name', 'like', '%'.$wheres['name'].'%');
-         }elseif (isset($wheres['res_system'])){
-             $model = $model->where('res_system', $wheres['res_system']);
-         }
 
-         if (isset($orders['created_at'])){
-             $model = $model->orderBy('created_at','desc');
-         }elseif (isset($orders['hits'])){
-             $model = $model->orderBy('hits','desc');
-         }
-         return $model->get();
+/**
+ * 标签链接
+ */
+if (!function_exists('tag_path')) {
+    function tag_path($id)
+    {
+        return route('cms.tag', $id);
     }
 }
 
-if (!function_exists('tags')) {
-    function tags($conditions)
+/**
+ * 文章链接
+ */
+if (!function_exists('post_path')) {
+    function post_path($id)
     {
-        $model = new TopSystem\TopPortal\Models\Download();
-        if (isset($conditions['category_id'])){
-            $model = $model->where('category_id',$conditions['category_id']);
+        return route('cms.post', $id);
+    }
+}
+
+/**
+ * 文章链接
+ */
+if (!function_exists('image_path')) {
+    function image_path($id)
+    {
+        return '/storage/' . $id;
+    }
+}
+
+/**
+ * 文章链接
+ */
+if (!function_exists('makeTreeViewJson')) {
+    function makeTreeViewJson($array)
+    {
+        //第一步 构造数据
+        $items = array();
+        foreach($array as $value){
+            $items[$value['id']] = ['text'  => $value['name'],'parent_id' => $value['parent_id']];
         }
-        return $model->get();
-    }
-}
-
-if (!function_exists('banners')) {
-    function banners($conditions = [])
-    {
-        $model = new TopSystem\TopPortal\Models\Banner();
-        return $model->get();
-    }
-}
-
-if (!function_exists('links')) {
-    function links($conditions = [])
-    {
-        $model = new TopSystem\TopPortal\Models\Link();
-        return $model->get();
+        //第一步很容易就能看懂，就是构造数据，现在咱们仔细说一下第二步
+        $tree = array();
+        //遍历构造的数据
+        foreach($items as $key => $value){
+            //如果pid这个节点存在
+            if(isset($items[$value['parent_id']])){
+                //把当前的$value放到pid节点的son中 注意 这里传递的是引用 为什么呢？
+                $items[$value['parent_id']]['nodes'][] = &$items[$key];
+            }else{
+                $tree[] = &$items[$key];
+            }
+        }
+        return $tree;
     }
 }

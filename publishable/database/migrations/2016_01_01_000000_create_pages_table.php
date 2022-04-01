@@ -21,6 +21,7 @@ class CreatePagesTable extends Migration
             $table->text('body')->nullable();
             $table->string('image')->nullable();
             $table->string('slug')->unique();
+            $table->integer('post_hits');
             $table->text('meta_description')->nullable();
             $table->text('meta_keywords')->nullable();
             $table->enum('status', \TopSystem\TopPortal\Models\Page::$statuses)->default(\TopSystem\TopPortal\Models\Page::STATUS_INACTIVE);

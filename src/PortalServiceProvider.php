@@ -2,8 +2,11 @@
 
 namespace TopSystem\TopPortal;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use TopSystem\TopAdmin\Facades\Admin;
+use TopSystem\TopPortal\FormFields\SelectTreeHandler;
+use TopSystem\TopAdmin\Models\DataType;
 use TopSystem\TopAdmin\Seed;
 use TopSystem\TopPortal\Models\Category;
 use TopSystem\TopPortal\Models\Page;
@@ -19,6 +22,7 @@ class PortalServiceProvider extends ServiceProvider{
 
         $this->loadHelpers();
 
+
         if ($this->app->runningInConsole()) {
             $this->registerPublishableResources();
             $this->registerConsoleCommands();
@@ -26,6 +30,10 @@ class PortalServiceProvider extends ServiceProvider{
         Admin::useModel("Category", Category::class);
         Admin::useModel("Page", Page::class);
         Admin::useModel("Post", Post::class);
+
+        Admin::addCss('https://cdn.bootcdn.net/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.css');
+        Admin::addJs('https://cdn.bootcdn.net/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js');
+        Admin::addFormField(SelectTreeHandler::class);
 
     }
 
