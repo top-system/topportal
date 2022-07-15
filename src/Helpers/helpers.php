@@ -6,6 +6,9 @@
 if (!function_exists('category_path')) {
     function category_path($id)
     {
+        if ($id <= 0){
+            return '';
+        }
         return route('cms.category', $id);
     }
 }
@@ -17,6 +20,9 @@ if (!function_exists('category_path')) {
 if (!function_exists('tag_path')) {
     function tag_path($id)
     {
+        if ($id <= 0){
+            return '';
+        }
         return route('cms.tag', $id);
     }
 }
@@ -27,6 +33,9 @@ if (!function_exists('tag_path')) {
 if (!function_exists('post_path')) {
     function post_path($id)
     {
+        if ($id <= 0){
+            return '';
+        }
         return route('cms.post', $id);
     }
 }
