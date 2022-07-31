@@ -15,8 +15,8 @@ class CreateTagsTable extends Migration
         // Create table for storing categories
         Schema::create('tags', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('slug')->unique();
+            $table->string('name')->nullable();
+            $table->string('slug')->nullable()->unique();
             $table->timestamps();
         });
     }

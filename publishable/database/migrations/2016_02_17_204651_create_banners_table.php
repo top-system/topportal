@@ -15,11 +15,11 @@ class CreateBannersTable extends Migration
         // Create table for storing banners
         Schema::create('banners', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->string('url');
+            $table->string('title')->nullable();
+            $table->string('url')->nullable();
             $table->integer('order')->default(1);
-            $table->string('logo');
-            $table->tinyInteger('status');
+            $table->string('logo')->nullable();
+            $table->tinyInteger('status')->nullable();
             $table->timestamps();
         });
     }
