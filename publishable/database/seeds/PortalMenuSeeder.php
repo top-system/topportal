@@ -24,7 +24,7 @@ class PortalMenuSeeder extends Seeder
         if (!$menuItem->exists) {
             $menuItem->fill([
                 'target'     => '_self',
-                'icon_class' => 'admin-news',
+                'icon_class' => 'admin-home',
                 'color'      => null,
                 'parent_id'  => null,
                 'order'      => 6,
