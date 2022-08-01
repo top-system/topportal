@@ -24,7 +24,7 @@ class TagsTableSeeder extends Seeder
                 'slug'                  => 'tags',
                 'display_name_singular' => 'Tag',
                 'display_name_plural'   => 'Tags',
-                'icon'                  => 'admin-tags',
+                'icon'                  => 'admin-tag',
                 'model_name'            => 'TopSystem\\TopPortal\\Models\\Tag',
                 'controller'            => '',
                 'generate_permissions'  => 1,

@@ -18,7 +18,8 @@ class PortalDummyDatabaseSeeder extends Seeder
             PagesTableSeeder::class,
             TranslationsTableSeeder::class,
             PermissionRoleTableSeeder::class,
-            TagsTableSeeder::class
+            TagsTableSeeder::class,
+            PortalMenuSeeder::class
         ]);
     }
 }

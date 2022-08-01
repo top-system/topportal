@@ -304,18 +304,49 @@ class PostsTableSeeder extends Seeder
             $dataRow->fill([
                 'type'         => 'relationship',
                 'display_name' => 'Tags',
-                'required'     => 1,
+                'required'     => 0,
                 'browse'       => 1,
                 'read'         => 1,
                 'edit'         => 1,
                 'add'          => 1,
-                'delete'       => 1,
+                'delete'       => 0,
                 'details'      => [
-                    'foreign_pivot_key' =>  'tid',
-                    'related_pivot_key' =>  'pid',
-                    'parent_key'        =>  'id'
+                    'model'       =>  'TopSystem\\TopPortal\\Models\\Tag',
+                    'table'       =>  'tags',
+                    'type'        => 'belongsToMany',
+                    'column'      => 'tid',
+                    'key'         => 'pid',
+                    'label'       => 'name',
+                    'pivot_table' => 'tag_post',
+                    'pivot'       => '1',
+                    'taggable'    => '0',
                 ],
                 'order'        => 16,
+            ])->save();
+        }
+
+        $dataRow = $this->dataRow($postDataType, 'post_belongsto_category_relationship');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'relationship',
+                'display_name' => 'Categories',
+                'required'     => 0,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 0,
+                'details'      => [
+                    'model'       => 'TopSystem\\TopAdmin\\Models\\Category',
+                    'table'       => 'categories',
+                    'type'        => 'belongsTo',
+                    'column'      => 'role_id',
+                    'key'         => 'category_id',
+                    'label'       => 'name',
+                    'pivot_table' => 'categories',
+                    'pivot'       => 0,
+                ],
+                'order'        => 17,
             ])->save();
         }
 
