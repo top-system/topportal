@@ -39,7 +39,7 @@ class TagsTableSeeder extends Seeder
                 'type'         => 'number',
                 'display_name' => __('admin::seeders.data_rows.id'),
                 'required'     => 1,
-                'browse'       => 0,
+                'browse'       => 1,
                 'read'         => 0,
                 'edit'         => 0,
                 'add'          => 0,
